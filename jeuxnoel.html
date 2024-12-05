@@ -329,20 +329,32 @@
         // Fonction de saut avec délai
         document.addEventListener('keydown', function(event) {
             if (event.key === ' ' && !isJumping && !gameOver) {
-                isJumping = true;
-                dinosaur.classList.add('jump');
-        
-                setTimeout(() => {
-                    dinosaur.classList.remove('jump');
-                    isJumping = false;
-                }, 600);  // Durée du saut, modifiable
-        
-                // Ajouter un délai entre chaque saut
-                setTimeout(() => {
-                    isJumping = true;;
-                }, 60);  // Empêche de sauter avant la fin du premier saut
+                jump();
             }
         });
+        
+        // Fonction de saut avec un clic
+        document.addEventListener('click', function() {
+            if (!isJumping && !gameOver) {
+                jump();
+            }
+        });
+        
+        function jump() {
+            isJumping = true;
+            dinosaur.classList.add('jump');
+        
+            // Durée du saut, modifiable
+            setTimeout(() => {
+                dinosaur.classList.remove('jump');
+                isJumping = false;
+            }, 600);  // Durée du saut, modifiable
+        
+            // Ajouter un délai entre chaque saut
+            setTimeout(() => {
+                isJumping = true;
+            }, 60);  // Empêche de sauter avant la fin du premier saut
+        }
 
         // Arrêter le jeu
         function stopGame() {
